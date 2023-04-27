@@ -5,14 +5,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node ./src/app.js",
-    "dev":"nodemon ./src/app.js",
-    "db":"mongod --dbpath ~/.mongo"
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "db": "mongod --dbpath ~/.mongo"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
