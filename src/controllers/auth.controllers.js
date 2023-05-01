@@ -36,3 +36,13 @@ export async function signUp(req, res) {
     res.status(500).send(err.message)
   }
 }
+
+export async function logOut(req, res) {
+  try {
+    const token = res.locals.token;
+    await db.collection("sessions").deleteOne({ token });
+    res.sendStatus(200);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
