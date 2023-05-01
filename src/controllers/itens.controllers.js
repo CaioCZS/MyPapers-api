@@ -22,3 +22,29 @@ export async function getItemById(req, res) {
     res.status(500).send(err.message);
   }
 }
+
+export async function buy(req, res) {
+  const { id } = req.params;
+  const { bodyUserId } = req.body;
+
+  try {
+    const item = await db
+      .collection("itens")
+      .findOne({ _id: new ObjectId(id) });
+
+    const userId = bodyUserId;
+
+    await db.collection("card").insertOne({
+      userId: userId,
+      productId: item._id,
+      name: item.name,
+      image: item.image,
+      price: item.price,
+      description: item.description,
+      quantity: 1,
+    });
+    res.send("Ítem adicionado ao carrinho!");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+}
