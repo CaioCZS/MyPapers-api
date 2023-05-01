@@ -32,7 +32,7 @@ export async function buy(req, res) {
       .collection("itens")
       .findOne({ _id: new ObjectId(id) });
 
-    await db.collection("card").insertOne({
+    await db.collection("cart").insertOne({
       userId: bodyUserId,
       productId: item._id,
       name: item.name,
