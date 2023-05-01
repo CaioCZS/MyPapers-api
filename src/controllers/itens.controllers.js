@@ -25,15 +25,15 @@ export async function getItemById(req, res) {
 
 export async function buy(req, res) {
   const { id } = req.params;
-  const { bodyUserId } = req.body;
+  const { userId } = res.locals.session
 
   try {
     const item = await db
       .collection("itens")
       .findOne({ _id: new ObjectId(id) });
 
-    await db.collection("card").insertOne({
-      userId: bodyUserId,
+    await db.collection("cart").insertOne({
+      userId: userId,
       productId: item._id,
       name: item.name,
       image: item.image,
