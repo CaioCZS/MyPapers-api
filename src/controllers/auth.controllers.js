@@ -25,7 +25,7 @@ export async function signUp(req, res) {
 
   try {
     const user = await db.collection("users").findOne({ email })
-    if (user) res.status(409).send("E-mail ja cadastrado")
+    if (user) return res.status(409).send("E-mail ja cadastrado")
 
     const hash = bcrypt.hashSync(password, 10)
 
