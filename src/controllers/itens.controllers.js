@@ -25,7 +25,7 @@ export async function getItemById(req, res) {
 
 export async function buy(req, res) {
   const { id } = req.params;
-  const { bodyUserId } = req.body;
+  const { userId } = res.locals.session
 
   try {
     const item = await db
@@ -33,7 +33,7 @@ export async function buy(req, res) {
       .findOne({ _id: new ObjectId(id) });
 
     await db.collection("cart").insertOne({
-      userId: bodyUserId,
+      userId: userId,
       productId: item._id,
       name: item.name,
       image: item.image,
