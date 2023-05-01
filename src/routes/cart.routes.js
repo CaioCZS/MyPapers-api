@@ -11,7 +11,7 @@ const cartRouter = Router()
 cartRouter.use(authValidation)
 
 cartRouter.get("/cart", getCartItens)
-cartRouter.put("/cart", updateCartIten)
-cartRouter.delete("/cart", removeCartIten)
+cartRouter.put("/cart/:id", updateCartIten)
+cartRouter.delete("/cart/:id", removeCartIten)
 
 export default cartRouter

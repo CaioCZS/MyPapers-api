@@ -4,15 +4,12 @@ export async function getCartItens(req, res) {
   const { userId } = res.locals.session
 
   try {
-    const cart = await db.collection("cart").findOne({ userId })
+    const cart = await db.collection("cart").find({ userId }).toArray()
     console.log(cart)
 
     if (!cart) return res.status(404).send("Carrinho está vazio")
 
-    const { products } = cart
-    console.log(products)
-
-    res.status(200).send(products)
+    res.status(200).send(cart)
 
   } catch (error) {
     res.status(500).send(error.message)
