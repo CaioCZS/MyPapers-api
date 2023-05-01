@@ -32,10 +32,8 @@ export async function buy(req, res) {
       .collection("itens")
       .findOne({ _id: new ObjectId(id) });
 
-    const userId = bodyUserId;
-
     await db.collection("card").insertOne({
-      userId: userId,
+      userId: bodyUserId,
       productId: item._id,
       name: item.name,
       image: item.image,

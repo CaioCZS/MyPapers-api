@@ -39,7 +39,7 @@ export async function signUp(req, res) {
 
 export async function logOut(req, res) {
   try {
-    const token = res.locals.token;
+    const token = res.locals.session.token;
     await db.collection("sessions").deleteOne({ token });
     res.sendStatus(200);
   } catch (err) {
