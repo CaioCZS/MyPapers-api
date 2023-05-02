@@ -25,14 +25,14 @@ export async function getItemById(req, res) {
 
 export async function buy(req, res) {
   const { id } = req.params;
-  const { userId } = res.locals.session
+  const { userId } = req.body;
 
   try {
     const item = await db
       .collection("itens")
       .findOne({ _id: new ObjectId(id) });
 
-    const buyItem = await db.collection("cart").insertOne({
+    const buyItem = {
       userId: userId,
       productId: item._id,
       name: item.name,
@@ -40,8 +40,9 @@ export async function buy(req, res) {
       price: item.price,
       description: item.description,
       quantity: 1,
-    });
-    res.send(buyItem);
+    };
+    await db.collection("cart").insertOne(buyItem);
+    return res.send(buyItem);
   } catch (err) {
     res.status(500).send(err.message);
   }
