@@ -33,7 +33,7 @@ export async function buy(req, res) {
       productId: item._id,
       name: item.name,
       image: item.image,
-      price: item.price,
+      price: Number(item.price),
       description: item.description,
       quantity: 1,
     }
