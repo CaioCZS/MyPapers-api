@@ -10,10 +10,8 @@ import { quantitySchema } from "../schemas/cart.schemas.js"
 
 const cartRouter = Router()
 
-cartRouter.use(authValidation)
-
-cartRouter.get("/cart", getCartItens)
-cartRouter.put("/cart/:id", schemaValidation(quantitySchema), updateCartItem)
-cartRouter.delete("/cart/:id", removeCartItem)
+cartRouter.get("/cart", authValidation, getCartItens)
+cartRouter.put("/cart/:id", authValidation, schemaValidation(quantitySchema), updateCartItem)
+cartRouter.delete("/cart/:id", authValidation, removeCartItem)
 
 export default cartRouter

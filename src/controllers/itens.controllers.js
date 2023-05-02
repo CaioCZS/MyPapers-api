@@ -32,7 +32,7 @@ export async function buy(req, res) {
       .collection("itens")
       .findOne({ _id: new ObjectId(id) });
 
-    await db.collection("cart").insertOne({
+    const buyItem = await db.collection("cart").insertOne({
       userId: userId,
       productId: item._id,
       name: item.name,
@@ -41,7 +41,7 @@ export async function buy(req, res) {
       description: item.description,
       quantity: 1,
     });
-    res.send("Ítem adicionado ao carrinho!");
+    res.send(buyItem);
   } catch (err) {
     res.status(500).send(err.message);
   }
