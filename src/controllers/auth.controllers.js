@@ -14,7 +14,7 @@ export async function signIn(req, res) {
 
     const token = uuid()
     await db.collection("sessions").insertOne({ token, userId: user._id })
-    res.send({ token, userName: user.name })
+    res.send({ token, userName: user.name, userId: user._id })
   } catch (err) {
     res.status(500).send(err.message)
   }
@@ -39,10 +39,10 @@ export async function signUp(req, res) {
 
 export async function logOut(req, res) {
   try {
-    const { token } = res.locals.session;
-    await db.collection("sessions").deleteOne({ token });
-    res.sendStatus(200);
+    const { token } = res.locals.session
+    await db.collection("sessions").deleteOne({ token })
+    res.sendStatus(200)
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send(err.message)
   }
 }
