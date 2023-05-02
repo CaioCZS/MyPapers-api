@@ -4,12 +4,11 @@ import {
   getItens,
   buy,
 } from "../controllers/itens.controllers.js";
-import { authValidation } from "../middlewares/authValidation.middleware.js";
 
 const itensRouter = Router();
 
 itensRouter.get("/", getItens);
 itensRouter.get("/item/:id", getItemById);
-itensRouter.post("/buy/:id", authValidation, buy);
+itensRouter.post("/buy/:id", buy);
 
 export default itensRouter;
